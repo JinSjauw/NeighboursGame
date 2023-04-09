@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
         cinemachineTransposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
         targetFollowOffset = cinemachineTransposer.m_FollowOffset;
         SceneWidth = Screen.width;
-        
+        transform.position = LevelGrid.Instance.GetGridCenter();
     }
 
     // Update is called once per frame
