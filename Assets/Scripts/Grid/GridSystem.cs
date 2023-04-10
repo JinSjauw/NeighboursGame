@@ -99,7 +99,23 @@ public class GridSystem<TGridObject>
          }
       }
    }
-
+   
+   public void CreateDebugObjects(Transform debugPrefab, GridObject[,] array)
+   {
+      foreach (var gridObject in array)
+      {
+         if (gridObject == null)
+         {
+            continue;
+         }
+         
+         GridPosition gridPosition = gridObject.GetGridPosition();
+         Transform debugTransform = GameObject.Instantiate(debugPrefab, GetWorldPosition(gridPosition), Quaternion.identity);
+         GridDebugObject gridDebugObject = debugTransform.GetComponent<GridDebugObject>();
+         gridDebugObject.SetGridObject(gridObject);
+      }
+   }
+   
    public GridObject GetGridObject(GridPosition _gridPosition)
    {
       return gridObjectArray[_gridPosition.x, _gridPosition.z] as GridObject;
