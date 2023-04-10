@@ -45,7 +45,6 @@ public class LevelGrid : MonoBehaviour
         }
         else
         {
-            
             Instantiate(_buildingPrefab, GetWorldPosition(gridObject.GetGridPosition()), Quaternion.identity);
             gridObject.SetOccupied(true);
 

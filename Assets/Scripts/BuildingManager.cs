@@ -21,5 +21,7 @@ public class BuildingManager : MonoBehaviour
         {
             LevelGrid.Instance.PlaceBuilding(Mouse.GetPosition(), buildingPrefab);
         }
+        
+        //After every action collect money from all the buildings?
     }
 }
