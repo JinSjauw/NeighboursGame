@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -10,11 +11,20 @@ public class BuildingManager : MonoBehaviour
 {
     public static BuildingManager Instance;
 
+    [Header("UI Objects")] 
+    [SerializeField] private TextMeshProUGUI moneyCounterText;
+    
     [SerializeField] private List<Transform> buildingPrefabList;
     [SerializeField] private Transform buildingPrefab;
-    public event EventHandler OnPlayerActed;
+    [SerializeField] private List<Building> activeBuildingList;
+    
+    [SerializeField] private int moneyAmount;
+    [SerializeField] private int socialAmount;
+    
     private LevelGrid grid;
     
+    public event EventHandler OnPlayerActed;
+
     private void Awake()
     {
         if (Instance != null)
@@ -22,7 +32,6 @@ public class BuildingManager : MonoBehaviour
             Destroy(gameObject);
         }
         Instance = this;
-        //buildingPrefabList = new List<Transform>();
     }
 
     private void Start()
@@ -44,16 +53,41 @@ public class BuildingManager : MonoBehaviour
         //Place building
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (grid.PlaceBuilding(Mouse.GetPosition(), buildingPrefab))
+            GameObject buildingObject = grid.PlaceBuilding(Mouse.GetPosition(), buildingPrefab);
+            
+            if (buildingObject == null)
             {
-                //Invoke playerAction eventHandler.
-                OnPlayerAction();
+                return;
             }
+
+            Building building = buildingObject.GetComponent<Building>();
+        
+            if (moneyAmount - building.BuildingCost < 0)
+            {
+                return;
+            }
+        
+            activeBuildingList.Add(building);
+
+            //Invoke playerAction eventHandler.
+            OnPlayerAction();
         }
+        
+        
     }
 
     private void OnPlayerAction()
     {
+        //Get All the building on the grid.
+        //Get Their social values and Add money and social worth
+        foreach (Building building in activeBuildingList)
+        {
+            moneyAmount += building.CommercialValue;
+            socialAmount += building.SocialValue;
+        }
+
+        moneyCounterText.text = "$ " + moneyAmount;
+        
         OnPlayerActed?.Invoke(null, EventArgs.Empty);
     }
 
