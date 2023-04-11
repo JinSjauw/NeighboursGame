@@ -43,12 +43,24 @@ public class LevelGrid : MonoBehaviour
         {
             for (int z = height / 2 - availableHeight; z < gridCenter.z + availableHeight + 1; z++)
             {
+                if (_array[x, z] != null)
+                {
+                    continue;
+                }
+                
                 GridObject gridObject = gridSystem.GetGridObject(new GridPosition(x, z));
                 _array[x, z] = gridObject;
             }
         }
     }
 
+    public void AddAvailableSize(int _width, int _height)
+    {
+        availableWidth += _width;
+        availableHeight += _height;
+        GetAvailableGrid(availableGrid);
+    }
+    
     public GridPosition GetGridPositionCenter()
     {
         return gridCenter;
@@ -72,7 +84,14 @@ public class LevelGrid : MonoBehaviour
     {
         //Check if it is within availableGrid;
         GridPosition target = gridSystem.GetGridPosition(_targetPosition);
+        if (availableGrid[target.x, target.z] == null)
+        {
+            Debug.Log("Not within the grid");
+            return null;
+        }
+        
         GridObject gridObject = availableGrid[target.x, target.z];
+        
         if (gridObject != null)
         {
             if (gridObject.IsOccupied())

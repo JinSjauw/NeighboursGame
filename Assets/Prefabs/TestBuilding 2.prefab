@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   socialValue: 2
   commercialValue: 5
+  buildingCost: 30
   type: 1
   tier: 0
   upgradeList: []

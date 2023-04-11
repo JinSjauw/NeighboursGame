@@ -44,6 +44,8 @@ public class BuildingManager : MonoBehaviour
         {
             Debug.Log("LevelGrid is NULL!");
         }
+        
+        moneyCounterText.text = "$ " + moneyAmount;
     }
 
     // Update is called once per frame
@@ -51,26 +53,32 @@ public class BuildingManager : MonoBehaviour
     {
         //Get the gridObject of the click
         //Place building
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            GameObject buildingObject = grid.PlaceBuilding(Mouse.GetPosition(), buildingPrefab);
-            
-            if (buildingObject == null)
+
+            Building building = buildingPrefab.GetComponent<Building>();
+
+            if (building == null)
             {
                 return;
             }
-
-            Building building = buildingObject.GetComponent<Building>();
-        
+            
             if (moneyAmount - building.BuildingCost < 0)
             {
                 return;
             }
-        
-            activeBuildingList.Add(building);
 
-            //Invoke playerAction eventHandler.
+            if (!grid.PlaceBuilding(Mouse.GetPosition(), buildingPrefab)
+                .TryGetComponent<Building>(out Building placedBuilding))
+            {
+                Debug.Log("Building is Null!");
+                return;
+            }
+
+            moneyAmount -= building.BuildingCost;
+            activeBuildingList.Add(placedBuilding);
             OnPlayerAction();
+            
         }
         
         

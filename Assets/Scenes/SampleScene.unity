@@ -1185,7 +1185,7 @@ MonoBehaviour:
   buildingPrefab: {fileID: 6188948366490942586, guid: 7ad4704740de143458bf2a51e18c31fb,
     type: 3}
   activeBuildingList: []
-  moneyAmount: 0
+  moneyAmount: 200
   socialAmount: 0
 --- !u!1 &990951487
 GameObject:
@@ -1218,6 +1218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnCounterText: {fileID: 1432788485}
   maxActions: 3
+  widthIncrease: 1
+  heightIncrease: 1
 --- !u!4 &990951489
 Transform:
   m_ObjectHideFlags: 0
@@ -1795,8 +1797,8 @@ MonoBehaviour:
   width: 19
   height: 19
   cellSize: 2
-  availableWidth: 3
-  availableHeight: 3
+  availableWidth: 2
+  availableHeight: 2
   gridDebugObject: {fileID: 1981648028813177864, guid: 7bca684cf433a9b49b02024356409f99,
     type: 3}
 --- !u!1 &1598071105
