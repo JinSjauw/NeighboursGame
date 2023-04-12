@@ -1202,8 +1202,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyCounterText: {fileID: 1752479241}
   buildingPrefabList:
-  - {fileID: 6188948366490942586, guid: 7ad4704740de143458bf2a51e18c31fb, type: 3}
-  - {fileID: 6188948366490942586, guid: d101879cc2353164ba96a724c01eea76, type: 3}
+  - {fileID: 6188948366490942586, guid: 6dde7cc93c76cc143916a7b08cc21e87, type: 3}
+  - {fileID: 6188948366490942586, guid: 2d5169f25739d164dbd35e976df64fe3, type: 3}
+  - {fileID: 6188948366490942586, guid: e96c08619ff52dc49a1fa883778590c8, type: 3}
+  - {fileID: 6188948366490942586, guid: b10392ade141ebf42adfcdcdee19cd7e, type: 3}
+  - {fileID: 6188948366490942586, guid: a2c5a9325e1b9b44494b4402a7e1120e, type: 3}
+  - {fileID: 6188948366490942586, guid: ec23a3515696a16498de556c1cd2ed37, type: 3}
+  - {fileID: 6188948366490942586, guid: 6baebc43bf910114daba1eff18800831, type: 3}
+  - {fileID: 6188948366490942586, guid: 879b57b6a00135a47ae4346a34e65bad, type: 3}
+  - {fileID: 6188948366490942586, guid: 355846b419638e74b80a1fb1dfaa6371, type: 3}
   buildingPrefab: {fileID: 6188948366490942586, guid: 7ad4704740de143458bf2a51e18c31fb,
     type: 3}
   activeBuildingList: []
@@ -1225,7 +1232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &990951488
 MonoBehaviour:
   m_ObjectHideFlags: 0
