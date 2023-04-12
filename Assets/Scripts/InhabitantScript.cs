@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InhabitantScript : MonoBehaviour
+public class InhabitantScript
 {
     public string FirstName;
     public string LastName;

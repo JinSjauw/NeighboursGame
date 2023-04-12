@@ -11,12 +11,19 @@ public class GameManager : MonoBehaviour
 
     public TreeScript Tree;
 
+    public static TurnSystem Instance;
+
     //Listen for player actions
     //Subscribe to playerInput EventHandlers.
     public int turnCounter;
     public int actionCounter;
     [SerializeField] private TextMeshProUGUI turnCounterText;
     [SerializeField] private int maxActions;
+
+    [SerializeField] private int widthIncrease;
+    [SerializeField] private int heightIncrease;
+
+    public event EventHandler OnTurnChanged;
 
     public List<InhabitantScript> Inhabitants = new List<InhabitantScript>();
     public List<GameObject> AllBuildings= new List<GameObject>();
@@ -29,14 +36,14 @@ public class GameManager : MonoBehaviour
         turnCounter = 0;
         actionCounter = 0;
         BuildingManager.Instance.OnPlayerActed += OnPlayerAction;
+        AddFirstNames();
+        AddLastNames();
         RandomPromptSequence();
     }
 
     private void OnPlayerAction(object _sender, EventArgs _e)
     {
         actionCounter++;
-        ActionUpdate();
-
         if (actionCounter >= maxActions)
         {
             NextTurn();
@@ -46,12 +53,16 @@ public class GameManager : MonoBehaviour
     private void NextTurn()
     {
         actionCounter = 0;
+
         //Go to next Turn
         Debug.Log("NextTurn");
         turnCounter++;
         turnCounterText.text = "Turn: " + turnCounter;
 
-        TurnUpdate();
+        LevelGrid.Instance.AddAvailableSize(widthIncrease, heightIncrease);
+
+        //Invoke OnTurnChangedEvent
+        OnTurnChanged?.Invoke(null, EventArgs.Empty);
     }
 
     private void ActionUpdate()
