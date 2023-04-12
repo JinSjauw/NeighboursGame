@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public List<string> FirstNames= new List<string>();
     public List<string> LastNames= new List<string>();
+    public List<string> RandomPrompts = new List<string>();
 
     void Start()
     {
@@ -38,7 +39,8 @@ public class GameManager : MonoBehaviour
         BuildingManager.Instance.OnPlayerActed += OnPlayerAction;
         AddFirstNames();
         AddLastNames();
-        RandomPromptSequence();
+        AddRandomPrompts();
+        StartCoroutine(RandomPromptSequence());
     }
 
     private void OnPlayerAction(object _sender, EventArgs _e)
@@ -77,14 +79,15 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RandomPromptSequence()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(20, 70));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(20, 40));
+        Debug.Log("Prompt time");
         InhabitantScript PromptGiver = Inhabitants[UnityEngine.Random.Range(0, Inhabitants.Count)];
         GameObject PromptHouse = PromptGiver.Home;
-        PromptHouse.GetComponent<ResBuildingScript>().CitizenName.text = PromptGiver.FirstName + PromptGiver.LastName;
-        PromptHouse.GetComponent<ResBuildingScript>().CitizenName.text = "Message"; //from list of random messages
-        PromptHouse.GetComponent<ResBuildingScript>().PromptUI.SetActive(true);
+        PromptHouse.GetComponent<ResidentialBuilding>().CitizenName.text = PromptGiver.FirstName + PromptGiver.LastName;
+        PromptHouse.GetComponent<ResidentialBuilding>().CitizenName.text = RandomPrompts[UnityEngine.Random.Range(0,RandomPrompts.Count)]; //from list of random messages
+        PromptHouse.GetComponent<ResidentialBuilding>().PromptUI.SetActive(true);
         yield return new WaitForSeconds(4);
-        PromptHouse.GetComponent<ResBuildingScript>().PromptUI.SetActive(false);
+        PromptHouse.GetComponent<ResidentialBuilding>().PromptUI.SetActive(false);
         StartCoroutine(RandomPromptSequence());
     }
 
@@ -115,6 +118,16 @@ public class GameManager : MonoBehaviour
            "Sato", "Holland", "Zutphen", "Bear", "Marx", "Beans", "Wheeler", "Peanut", "Bowl",
            "Mangler", "Terror", "Poubelle", "Williams", "Smeller", "Sanscul", "Soups", "Lord",
            "Toddson", "Cofveve", "Bing", "Croc", "Crumbs", "Crank", "Sneezer", "Snat");
+    }
+
+    private void AddRandomPrompts()
+    {
+        RandomPrompts.AddMany("Our borough is growing so quickly! I can't wait to see what he future has in store for us.", 
+            "Our bakery is running well enough, but we could always use more customers", 
+            "Say chief, how do you plan to keep this community thriving?", 
+            "I love taking walks near the central tree and catching up with the neighbours.", 
+            "I'm so glad we have so many skilled artisans around, it would take me ages to get this fixed.", 
+            "Horses");
     }
 
 }

@@ -47,6 +47,7 @@ public class ResidentialBuilding : Building
                     InhabitantScript member = new InhabitantScript();
                     member.FirstName = gameManager.FirstNames[Random.Range(0, gameManager.LastNames.Count)];
                     member.LastName = fam.FamilyName;
+                    member.Home = this.gameObject;
                     fam.FamilyMembers.Add(member);
                     gameManager.Inhabitants.Add(member);
                     Debug.Log("Added member");
@@ -67,6 +68,7 @@ public class ResidentialBuilding : Building
                         InhabitantScript member = new InhabitantScript();
                         member.FirstName = gameManager.FirstNames[Random.Range(0, gameManager.LastNames.Count)];
                         member.LastName = famv2.FamilyName;
+                        member.Home = this.gameObject;
                         famv2.FamilyMembers.Add(member);
                         gameManager.Inhabitants.Add(member);
                     }
@@ -84,6 +86,7 @@ public class ResidentialBuilding : Building
                         InhabitantScript member = new InhabitantScript();
                         member.FirstName = gameManager.FirstNames[Random.Range(0, gameManager.LastNames.Count)];
                         member.LastName = famv3.FamilyName;
+                        member.Home = this.gameObject;
                         famv3.FamilyMembers.Add(member);
                         gameManager.Inhabitants.Add(member);
                     }
