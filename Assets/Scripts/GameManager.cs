@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     private void TurnUpdate()
     {
-        Tree.UpdateTree();
+        //Tree.UpdateTree();
     }
 
     private IEnumerator RandomPromptSequence()
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         InhabitantScript PromptGiver = Inhabitants[UnityEngine.Random.Range(0, Inhabitants.Count)];
         GameObject PromptHouse = PromptGiver.Home;
         PromptHouse.GetComponent<ResidentialBuilding>().CitizenName.text = PromptGiver.FirstName + PromptGiver.LastName;
-        PromptHouse.GetComponent<ResidentialBuilding>().CitizenName.text = RandomPrompts[UnityEngine.Random.Range(0,RandomPrompts.Count)]; //from list of random messages
+        PromptHouse.GetComponent<ResidentialBuilding>().CitizenName.text = RandomPrompts[UnityEngine.Random.Range(0,RandomPrompts.Count)];
         PromptHouse.GetComponent<ResidentialBuilding>().PromptUI.SetActive(true);
         yield return new WaitForSeconds(4);
         PromptHouse.GetComponent<ResidentialBuilding>().PromptUI.SetActive(false);

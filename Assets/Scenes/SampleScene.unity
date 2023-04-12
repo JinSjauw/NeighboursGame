@@ -1204,7 +1204,7 @@ MonoBehaviour:
   moneyCounterText: {fileID: 1752479241}
   buildingPrefabList:
   - {fileID: 6188948366490942586, guid: 6dde7cc93c76cc143916a7b08cc21e87, type: 3}
-  - {fileID: 6188948366490942586, guid: 2d5169f25739d164dbd35e976df64fe3, type: 3}
+  - {fileID: -8679921383154817045, guid: 59bf76329b8f5d445b72e161e9a52306, type: 3}
   - {fileID: 6188948366490942586, guid: e96c08619ff52dc49a1fa883778590c8, type: 3}
   - {fileID: 6188948366490942586, guid: b10392ade141ebf42adfcdcdee19cd7e, type: 3}
   - {fileID: 6188948366490942586, guid: a2c5a9325e1b9b44494b4402a7e1120e, type: 3}

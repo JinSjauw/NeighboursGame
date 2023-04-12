@@ -12,7 +12,7 @@ public class TreeScript : MonoBehaviour
     private void Start()
     {
         FoliageMat = GetComponent<Material>();
-        this.gameObject.GetComponent<MeshFilter>().sharedMesh = TreeVer01.GetComponent<Mesh>();
+        //this.gameObject.GetComponent<MeshFilter>().sharedMesh = TreeVer01.GetComponent<Mesh>();
     }
 
     public void UpdateTree()
