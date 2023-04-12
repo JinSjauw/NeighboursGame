@@ -33,6 +33,22 @@ public class ResidentialBuilding : Building
         PopulateBuilding();
     }
 
+    public override void Init()
+    {
+        foreach (Transform button in buttonContainer)
+        {
+            Destroy(button);
+        }
+        
+        //Build upgrade UI
+        foreach (Building upgrade in upgradeList)
+        {
+            Transform button = Instantiate(upgradeButtonPrefab, buttonContainer);
+            button.TryGetComponent(out UpgradeButton upgradeButton);
+            upgradeButton.SetPrefab(upgrade.BuildingPrefab);
+        }
+    }
+    
     private void PopulateBuilding() //Check this one very well
     {
         switch (BuildingSize)

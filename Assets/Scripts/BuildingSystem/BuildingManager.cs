@@ -74,14 +74,12 @@ public class BuildingManager : MonoBehaviour
                 Debug.Log("Building is Null!");
                 return;
             }
-
+            placedBuilding.Init();
             moneyAmount -= building.BuildingCost;
             activeBuildingList.Add(placedBuilding);
             OnPlayerAction();
             
         }
-        
-        
     }
 
     private void OnPlayerAction()

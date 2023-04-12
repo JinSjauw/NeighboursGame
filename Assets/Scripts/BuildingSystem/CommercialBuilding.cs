@@ -20,11 +20,6 @@ public class CommercialBuilding : Building
 
     public GameManager gameManager;
 
-    public override List<Building> GetUpgradesList()
-    {
-        return upgradeList;
-    }
-
     private void Awake()
     {
         IncomeMultiplier = 1;
@@ -33,6 +28,27 @@ public class CommercialBuilding : Building
         StartCoroutine(Payment());
     }
 
+    public override void Init()
+    {
+        foreach (Transform button in buttonContainer)
+        {
+            Destroy(button);
+        }
+        
+        //Build upgrade UI
+        foreach (Building upgrade in upgradeList)
+        {
+            Transform button = Instantiate(upgradeButtonPrefab, buttonContainer);
+            button.TryGetComponent(out UpgradeButton upgradeButton);
+            upgradeButton.SetPrefab(upgrade.BuildingPrefab);
+        }
+    }
+    
+    public override List<Building> GetUpgradesList()
+    {
+        return upgradeList;
+    }
+    
     public void CheckCapacity() //should be checked every time the player uses a 'move' (places a building for example)
     {
         int ResBuildingsInArea = 0;

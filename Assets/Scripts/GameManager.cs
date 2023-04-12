@@ -116,5 +116,4 @@ public class GameManager : MonoBehaviour
            "Mangler", "Terror", "Poubelle", "Williams", "Smeller", "Sanscul", "Soups", "Lord",
            "Toddson", "Cofveve", "Bing", "Croc", "Crumbs", "Crank", "Sneezer", "Snat");
     }
-
 }

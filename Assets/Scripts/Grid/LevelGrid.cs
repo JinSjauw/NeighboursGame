@@ -33,7 +33,7 @@ public class LevelGrid : MonoBehaviour
         GetAvailableGrid(availableGrid);
         gridSystem.CreateDebugObjects(gridDebugObject, availableGrid);
     }
-
+    
     private void GetAvailableGrid(GridObject[,] _array)
     {
         GridObject center = gridSystem.GetGridObject(new GridPosition(width / 2, height / 2 ));
