@@ -9,6 +9,7 @@ public class ComBuildingScript : MonoBehaviour
 
     public int IncomeAmount;
     public int IncomeMultiplier;
+    public int PaymentInterval = 20;
 
     public int SocialWorth;
 
@@ -24,6 +25,7 @@ public class ComBuildingScript : MonoBehaviour
         IncomeMultiplier = 1;
         gameManager = FindObjectOfType<GameManager>();
         gameManager.AllBuildings.Add(this.gameObject);
+        StartCoroutine(Payment());
     }
 
     public void CheckCapacity() //should be checked every time the player uses a 'move' (places a building for example)
@@ -40,5 +42,12 @@ public class ComBuildingScript : MonoBehaviour
         {
             //unsuccesful, deactivates a residential building in range and reduces incomeMultiplier
         }
+    }
+
+    private IEnumerator Payment()
+    {
+        yield return new WaitForSeconds(PaymentInterval);
+        gameManager.PlayerMoney += IncomeAmount * IncomeMultiplier;
+        StartCoroutine(Payment());
     }
 }
