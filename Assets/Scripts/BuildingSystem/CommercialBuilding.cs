@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CommercialBuilding : Building
@@ -41,6 +42,8 @@ public class CommercialBuilding : Building
             Transform button = Instantiate(upgradeButtonPrefab, buttonContainer);
             button.TryGetComponent(out UpgradeButton upgradeButton);
             upgradeButton.SetPrefab(upgrade.BuildingPrefab);
+
+            GetComponentInChildren<TextMeshProUGUI>().text += upgrade.Type;
         }
     }
     

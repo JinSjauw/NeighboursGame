@@ -24,6 +24,7 @@ public class BuildingManager : MonoBehaviour
     private LevelGrid grid;
     
     public event EventHandler OnPlayerActed;
+    public event EventHandler OnBuildingClicked;
 
     private void Awake()
     {
@@ -51,11 +52,21 @@ public class BuildingManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //Get the gridObject of the click
-        //Place building
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
+            Vector3 clickPosition = Mouse.GetPosition();
+            //Check that gridobject
+            Building selectedBuilding = null;
+            if (grid.isOccupied(clickPosition))
+            {
+                selectedBuilding = grid.GetBuilding(clickPosition);
+                selectedBuilding.UpgradeMenu(true);
 
+                return;
+            }
+            
+            
+            //Place building
             Building building = buildingPrefab.GetComponent<Building>();
 
             if (building == null)
@@ -68,8 +79,8 @@ public class BuildingManager : MonoBehaviour
                 return;
             }
 
-            if (!grid.PlaceBuilding(Mouse.GetPosition(), buildingPrefab)
-                .TryGetComponent<Building>(out Building placedBuilding))
+            if (!grid.PlaceBuilding(clickPosition, buildingPrefab)
+                .TryGetComponent(out Building placedBuilding))
             {
                 Debug.Log("Building is Null!");
                 return;
@@ -78,10 +89,9 @@ public class BuildingManager : MonoBehaviour
             moneyAmount -= building.BuildingCost;
             activeBuildingList.Add(placedBuilding);
             OnPlayerAction();
-            
         }
     }
-
+    
     private void OnPlayerAction()
     {
         //Get All the building on the grid.
@@ -95,6 +105,18 @@ public class BuildingManager : MonoBehaviour
         moneyCounterText.text = "$ " + moneyAmount;
         
         OnPlayerActed?.Invoke(null, EventArgs.Empty);
+    }
+    
+    public void UpgradeBuilding(Transform _upgrade, Transform _target)
+    {
+        Vector3 targetPosition = _target.position;
+        //Destroy Building
+        activeBuildingList.Remove(_target.GetComponent<Building>());
+        Destroy(_target.gameObject);
+        //Clear gridObject
+        grid.ClearGridObject(grid.GetGridPosition(targetPosition));
+        //Place new One 
+        grid.PlaceBuilding(targetPosition, _upgrade);
     }
 
     public void OnClickResidential()

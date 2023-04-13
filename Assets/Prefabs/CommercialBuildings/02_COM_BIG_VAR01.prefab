@@ -51,7 +51,10 @@ MonoBehaviour:
   buildingCost: 20
   type: 1
   tier: 1
+  buildingPrefab: {fileID: 0}
   upgradeList: []
+  upgradeButtonPrefab: {fileID: 0}
+  buttonContainer: {fileID: 0}
   BuildingSize: 2
   HouseholdSize: 0
   SocialWorth: 0

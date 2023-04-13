@@ -27,7 +27,8 @@ public abstract class Building : MonoBehaviour
     [SerializeField] protected List<Building> upgradeList;
     [SerializeField] protected Transform upgradeButtonPrefab;
     [SerializeField] protected Transform buttonContainer;
-
+    [SerializeField] protected Transform upgradeMenu;
+    
     public BuildingType Type
     {
         get { return type; }
@@ -55,6 +56,11 @@ public abstract class Building : MonoBehaviour
         get { return buildingPrefab;  }
     }
 
+    public void UpgradeMenu(bool _state)
+    {
+        upgradeMenu.gameObject.SetActive(_state);
+    }
+    
     public abstract void Init();
     
     public abstract List<Building> GetUpgradesList();

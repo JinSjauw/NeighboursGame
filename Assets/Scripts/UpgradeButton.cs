@@ -11,8 +11,8 @@ public class UpgradeButton : MonoBehaviour
         buildingPrefab = _prefab;
     }
     
-    public Transform OnClick()
+    public void OnClick()
     {
-        return buildingPrefab;
+        BuildingManager.Instance.UpgradeBuilding(buildingPrefab, transform.root);
     }
 }

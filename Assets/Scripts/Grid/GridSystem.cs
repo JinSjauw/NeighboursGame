@@ -120,4 +120,9 @@ public class GridSystem<TGridObject>
    {
       return gridObjectArray[_gridPosition.x, _gridPosition.z] as GridObject;
    }
+
+   public void ClearGridObject(GridPosition _gridPosition)
+   {
+      GetGridObject(_gridPosition).SetOccupied(false);
+   }
 }

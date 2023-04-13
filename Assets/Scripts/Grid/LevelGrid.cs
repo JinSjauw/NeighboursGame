@@ -80,6 +80,8 @@ public class LevelGrid : MonoBehaviour
     
     public Vector3 GetWorldPosition(GridPosition _gridPosition) => gridSystem.GetWorldPosition(_gridPosition);
 
+    public void ClearGridObject(GridPosition _gridPosition) => gridSystem.ClearGridObject(_gridPosition);
+    
     public GameObject PlaceBuilding(Vector3 _targetPosition, Transform _buildingPrefab)
     {
         //Check if it is within availableGrid;
@@ -101,6 +103,7 @@ public class LevelGrid : MonoBehaviour
             
             Transform building = Instantiate(_buildingPrefab, GetWorldPosition(gridObject.GetGridPosition()), Quaternion.identity);
             gridObject.SetOccupied(true);
+            gridObject.SetBuilding(building.GetComponent<Building>());
             
             return building.gameObject;
         }
@@ -111,4 +114,16 @@ public class LevelGrid : MonoBehaviour
 
         return null;
     }
+
+    public Building GetBuilding(Vector3 _targetPosition)
+    {
+        return gridSystem.GetGridObject(GetGridPosition(_targetPosition)).GetCurrentBuilding();
+    }
+    
+    public bool isOccupied(Vector3 _targetPosition)
+    {
+        return gridSystem.GetGridObject(GetGridPosition(_targetPosition)).IsOccupied();
+    }
+    
+    
 }

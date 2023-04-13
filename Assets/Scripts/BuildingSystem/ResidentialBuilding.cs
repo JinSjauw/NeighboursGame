@@ -66,9 +66,9 @@ public class ResidentialBuilding : Building
                     member.Home = this.gameObject;
                     fam.FamilyMembers.Add(member);
                     gameManager.Inhabitants.Add(member);
-                    Debug.Log("Added member");
+                    //Debug.Log("Added member");
                 }
-                Debug.Log("People living in house:" + fam.FamilyMembers.Count.ToString());
+                //Debug.Log("People living in house:" + fam.FamilyMembers.Count.ToString());
 
 
                 break;

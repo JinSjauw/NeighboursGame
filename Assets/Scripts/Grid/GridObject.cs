@@ -6,7 +6,7 @@ public class GridObject
 {
     private GridSystem<GridObject> gridSystem;
     private GridPosition gridPosition;
-
+    private Building currentBuilding;
     private bool isOccupied;
 
     public GridObject(GridSystem<GridObject> _gridSystem, GridPosition _gridPosition)
@@ -28,6 +28,16 @@ public class GridObject
     public void SetOccupied(bool _state)
     {
         isOccupied = _state;
+    }
+
+    public void SetBuilding(Building _building)
+    {
+        currentBuilding = _building;
+    }
+
+    public Building GetCurrentBuilding()
+    {
+        return currentBuilding;
     }
     
     public override string ToString()
