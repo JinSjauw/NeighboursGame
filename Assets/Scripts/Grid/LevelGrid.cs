@@ -13,7 +13,7 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private int availableWidth;
     [SerializeField] private int availableHeight;
 
-    [SerializeField] private Transform gridVisual;
+    [SerializeField] private Transform gridVisualPrefab;
     [SerializeField] private Transform gridDebugObject;
     private GridSystem<GridObject> gridSystem;
     private GridObject[,] availableGrid;
@@ -34,7 +34,7 @@ public class LevelGrid : MonoBehaviour
         availableGrid = new GridObject[width, height];
         gridVisualObjects = new List<Transform>();
         GetAvailableGrid(availableGrid);
-        gridSystem.CreateDebugObjects(gridDebugObject, availableGrid);
+        //gridSystem.CreateDebugObjects(gridDebugObject, availableGrid);
     }
     
     private void GetAvailableGrid(GridObject[,] _array)
@@ -53,7 +53,9 @@ public class LevelGrid : MonoBehaviour
                 
                 GridObject gridObject = gridSystem.GetGridObject(new GridPosition(x, z));
                 _array[x, z] = gridObject;
-                Instantiate(gridVisual, GetWorldPosition(gridObject.GetGridPosition()), Quaternion.identity);
+                
+                Transform gridVisual = Instantiate(gridVisualPrefab, GetWorldPosition(gridObject.GetGridPosition()), Quaternion.identity);
+                gridVisualObjects.Add(gridVisual);
             }
         }
     }
