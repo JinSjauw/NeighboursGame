@@ -1971,6 +1971,8 @@ MonoBehaviour:
   cellSize: 2
   availableWidth: 2
   availableHeight: 2
+  gridVisual: {fileID: 237636734886726067, guid: e73a1330aaf21014e883002dfb6bc4ee,
+    type: 3}
   gridDebugObject: {fileID: 1981648028813177864, guid: 7bca684cf433a9b49b02024356409f99,
     type: 3}
 --- !u!1 &1598071105

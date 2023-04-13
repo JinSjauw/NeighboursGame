@@ -13,9 +13,11 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private int availableWidth;
     [SerializeField] private int availableHeight;
 
+    [SerializeField] private Transform gridVisual;
     [SerializeField] private Transform gridDebugObject;
     private GridSystem<GridObject> gridSystem;
     private GridObject[,] availableGrid;
+    private List<Transform> gridVisualObjects;
     private GridPosition gridCenter;
    
     private void Awake()
@@ -30,6 +32,7 @@ public class LevelGrid : MonoBehaviour
         
         gridSystem = new GridSystem<GridObject>(width, height, cellSize, (GridSystem<GridObject> _grid, GridPosition _gridPosition) => new GridObject(_grid, _gridPosition));
         availableGrid = new GridObject[width, height];
+        gridVisualObjects = new List<Transform>();
         GetAvailableGrid(availableGrid);
         gridSystem.CreateDebugObjects(gridDebugObject, availableGrid);
     }
@@ -43,13 +46,14 @@ public class LevelGrid : MonoBehaviour
         {
             for (int z = height / 2 - availableHeight; z < gridCenter.z + availableHeight + 1; z++)
             {
-                if (_array[x, z] != null)
+                if (_array[x, z] != null || gridCenter == new GridPosition(x, z))
                 {
                     continue;
                 }
                 
                 GridObject gridObject = gridSystem.GetGridObject(new GridPosition(x, z));
                 _array[x, z] = gridObject;
+                Instantiate(gridVisual, GetWorldPosition(gridObject.GetGridPosition()), Quaternion.identity);
             }
         }
     }
